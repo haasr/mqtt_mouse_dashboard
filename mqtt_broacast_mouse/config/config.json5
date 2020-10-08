@@ -1,0 +1,15 @@
+{
+	"USB_MOUSE_CONFIG":
+	{
+		"Vendor_ID": 0x093a,
+		"Product_ID": 0x2510
+	},
+
+	"MQTT_CONFIG":
+	{
+		port: '1883',
+		host: '192.168.10.226',
+		username: 'ryan',
+		password: '^&fUIk*8Gax4$]o'
+	}
+}
