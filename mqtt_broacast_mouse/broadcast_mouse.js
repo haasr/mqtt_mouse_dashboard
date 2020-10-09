@@ -1,13 +1,12 @@
-const JSON5 = require('json5'); // Using JSON5 because hex values are supported.
-const fs = require('fs');
+const FS    = require('fs');
+const HID   = require('node-hid');
+const JSON5 = require('json5'); // Using json5 because hex values are supported.
+const MQTT  = require('mqtt');
 
 // Read in the JSON file to an object:
 let json_obj = JSON5.parse(
-	fs.readFileSync('config/config.json5')
+	FS.readFileSync('config/config.json5')
 );
-
-const HID   = require('node-hid');
-const MQTT  = require('mqtt');
 
 // Create the node-hid object using the hexadecimal values from the config:
 const MOUSE = new HID.HID(json_obj['USB_MOUSE_CONFIG']['Vendor_ID'],
