@@ -154,6 +154,7 @@ def on_message(client, userdata, msg):
 
     print('\nMOUSE INPUT: ')
     print(msg.payload)
+    print()
 
 def init_window():
 
