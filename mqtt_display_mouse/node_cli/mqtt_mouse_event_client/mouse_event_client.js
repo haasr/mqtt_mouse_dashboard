@@ -23,7 +23,7 @@ client.on('connect', function () {
 	
 	// Subscribe and notify:
 	client.subscribe('pub/mouseinput', function (err) {
-		console.log('\n[MQTT Client] Subscribed to pub/mouseinput\n');
+		console.log('\n[MQTT Client] Subscribed to pub/mouseinput.\n');
 		if (err) throw "Error description: " + err;
 	});
 });
