@@ -1,3 +1,10 @@
+/*
+ * Ryan Haas
+ * Dr. David Tarnoff
+ * CSCI 4677-901, IoT
+ * 9 October, 2020
+ */
+
 const FS    = require('fs');
 const HID   = require('node-hid');
 const JSON5 = require('json5'); // Using json5 because hex values are supported.
@@ -17,9 +24,13 @@ const MQTT_CLIENT = MQTT.connect(json_obj["MQTT_CONFIG"]);
 
 // Set inFunction of the node-hid USB mouse object:
 MOUSE.inFunction = receiveEtBroadcast;
-// Bind the receiveEtBroadcast function:
+// Bind the HID mouse object with the receiveEtBroadcast function:
 MOUSE.read(MOUSE.inFunction.bind(MOUSE));
 
+/*
+	Function responsible for 2 things: receiving input form HID
+	and broadcasing it:
+*/
 function receiveEtBroadcast(err, data) {
 	// Handle any errors that occur because of the read() function.
 	if (err) console.log('Error received when receiving data ', err);
@@ -36,6 +47,7 @@ function receiveEtBroadcast(err, data) {
 	this.read(this.inFunction.bind(this));
 }
 
+// Connect to broker and notify:
 MQTT_CLIENT.on('connect', function() {
-	console.log("\nPi MQTT client connected to broker.\n");
+	console.log('\n[MQTT Client] Connected to broker.');
 });

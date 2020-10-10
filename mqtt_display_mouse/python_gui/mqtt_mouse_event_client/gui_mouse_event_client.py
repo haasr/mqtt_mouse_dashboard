@@ -1,9 +1,20 @@
+"""
+Ryan Haas
+Dr. David Tarnoff
+CSCI 4677-901, IoT
+9 October, 2020
+
+I'm not going to comment this; consider my Node dashboard
+the requirement. This is just a little bonus.
+"""
+
 import paho.mqtt.client as mqtt
 from config import mqtt_config
 from tkinter import *
 from PIL import Image, ImageTk
 from threading import Thread
 from time import sleep
+import math
 
 WINDOW = Tk()
 
@@ -71,9 +82,24 @@ def scroll_down():
     sleep(.02)
     scroll_down_label.place_forget()
 
+"""
+	This function was adapted from one that appeared on the page:
+	https://stackoverflow.com/questions/13468474/javascript-convert-a-hex-signed-integer-to-a-javascript-value
+"""
+def hex_to_int(hex):
+    hex = str(hex)
+    print('HEX:')
+    if (len(hex) % 2 != 0):
+        hex = '0' + hex
+    num = int(hex, 16)
+    max_val = math.pow(2, (len(hex) // 2 * 8))
+    if (num > (max_val / 2 - 1)):
+        num = num - max_val
+
+    return num
 
 def on_subscribe(client, userdata, mid, granted_qos):
-    print('Subscribed: ' + str(mid) + ' ' + str(granted_qos))
+    print('\n[MQTT Client] Subscribed: ' + str(mid) + ' ' + str(granted_qos))
 
 
 def on_message(client, userdata, msg):
@@ -84,42 +110,50 @@ def on_message(client, userdata, msg):
     scroll = int(msg.payload[3])
 
     sum = 0
-    if (x_val < 248):
+    if (x_val < 200):
         if(x_val == 0):
             print('No X movement')
         else:
             x_right()
+            print('Mouse right')
     else:
         x_left()
+        print('Mouse left')
 
-    if (y_val < 248):
+    if (y_val < 200):
         if (y_val == 0):
             print('No Y movement')
         else:
             y_down()
+            print('Mouse down')
     else:
         y_up()
+        print('Mouse up')
 
     if (click == 0):
         print('No click')
     else:
         if (click == 1):
             left_click()
+            print('Left click')
         elif (click == 2):
             right_click()
+            print('Right click')
         else:
             wheel_click()
-    
+            print('Wheel click')
+
     if (scroll == 0):
         print('No scroll')
     else:
         if (scroll == 1):
             scroll_up()
+            print('Scroll up')
         else:
             scroll_down()
 
+    print('\nMOUSE INPUT: ')
     print(msg.payload)
-    print()
 
 def init_window():
 
@@ -229,6 +263,7 @@ def init_client():
     client.on_message = on_message
     client.connect(host=mqtt_config.CONFIG['host'], 
                     port=mqtt_config.CONFIG['port'])
+    print('\n[MQTT Client] Connected to broker.\n')
 
     client.subscribe('pub/mouseinput', qos=0)
 
