@@ -82,21 +82,6 @@ def scroll_down():
     sleep(.02)
     scroll_down_label.place_forget()
 
-"""
-	This function was adapted from one that appeared on the page:
-	https://stackoverflow.com/questions/13468474/javascript-convert-a-hex-signed-integer-to-a-javascript-value
-"""
-def hex_to_int(hex):
-    hex = str(hex)
-    print('HEX:')
-    if (len(hex) % 2 != 0):
-        hex = '0' + hex
-    num = int(hex, 16)
-    max_val = math.pow(2, (len(hex) // 2 * 8))
-    if (num > (max_val / 2 - 1)):
-        num = num - max_val
-
-    return num
 
 def on_subscribe(client, userdata, mid, granted_qos):
     print('\n[MQTT Client] Subscribed: ' + str(mid) + ' ' + str(granted_qos))
