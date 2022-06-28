@@ -14,7 +14,6 @@ from tkinter import *
 from PIL import Image, ImageTk
 from threading import Thread
 from time import sleep
-import math
 
 WINDOW = Tk()
 
@@ -88,7 +87,6 @@ def on_subscribe(client, userdata, mid, granted_qos):
 
 
 def on_message(client, userdata, msg):
-    
     click = int(msg.payload[0])
     x_val = int(msg.payload[1])
     y_val = int(msg.payload[2])
@@ -141,8 +139,8 @@ def on_message(client, userdata, msg):
     print(msg.payload)
     print()
 
-def init_window():
 
+def init_window():
     global left_click_label
     global right_click_label
     global wheel_click_label
@@ -256,5 +254,7 @@ def init_client():
     t = Thread(target=client.loop_forever)
     t.start()
 
+
 init_client()
 init_window()
+scroll_up()
