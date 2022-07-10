@@ -1,6 +1,8 @@
 Internet of Things (Fall 2020), MQTT Midterm Project
 ====================================================
 
+For an overview of the project, read [the project writeup](https://github.com/haasr/mqtt_mouse_dashboard/blob/master/HaasR-4677-901-midterm-project.pdf).
+
 In this project, I was tasked to acquire a USB mouse or game controller, study
 the outputs of the device to identify what each byte indicates, and then create
 two MQTT components.
@@ -16,5 +18,3 @@ Python tkinter dashboard which maps where action is happening on an image of a
 mouse.
 
 ![Neat graphical mouse dashboard](screenshots/python-dashboard.png)
-
-For an overview of the project, read [the project writeup](https://github.com/haasr/mqtt_mouse_dashboard/blob/master/HaasR-4677-901-midterm-project.pdf).
